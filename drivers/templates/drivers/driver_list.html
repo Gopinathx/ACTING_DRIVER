@@ -19,6 +19,700 @@
     [x-cloak] { display: none !important; }
   </style>
 </head>
+<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col justify-between font-sans" x-data="{ activeTab: 'home' }">
+
+  <div>
+    <!-- Navigation Header -->
+    <header class="bg-indigo-900/95 backdrop-blur-md text-white shadow-lg sticky top-0 z-50 border-b border-indigo-800/50">
+      <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
+        
+        <!-- Logo -->
+        <div class="flex items-center space-x-3 cursor-pointer" @click="activeTab = 'home'">
+          <div class="p-2 bg-indigo-600 rounded-xl border border-indigo-400/30 shadow-md">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-black tracking-tight flex items-center gap-1.5">
+              DriveDirect
+              <span class="text-[10px] bg-indigo-500/40 text-indigo-200 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">Pro</span>
+            </h1>
+            <p class="text-[11px] text-indigo-300 font-medium">Verified On-Demand Drivers</p>
+          </div>
+        </div>
+
+        <!-- Pill Navigation -->
+        <nav class="flex bg-indigo-950/60 p-1.5 rounded-2xl border border-white/10 text-xs font-semibold w-full sm:w-auto overflow-x-auto">
+          <button 
+            @click="activeTab = 'home'" 
+            :class="activeTab === 'home' ? 'bg-white text-indigo-900 shadow-sm' : 'text-indigo-200 hover:text-white'"
+            class="px-4 py-2 rounded-xl transition-all duration-200 flex-1 sm:flex-initial text-center whitespace-nowrap"
+          >
+            🏠 Home
+          </button>
+
+          <button 
+            @click="activeTab = 'drivers'" 
+            :class="activeTab === 'drivers' ? 'bg-white text-indigo-900 shadow-sm' : 'text-indigo-200 hover:text-white'"
+            class="px-4 py-2 rounded-xl transition-all duration-200 flex-1 sm:flex-initial text-center whitespace-nowrap"
+          >
+            🚗 Find Drivers
+          </button>
+          
+          <button 
+            @click="activeTab = 'tariffs'" 
+            :class="activeTab === 'tariffs' ? 'bg-white text-indigo-900 shadow-sm' : 'text-indigo-200 hover:text-white'"
+            class="px-4 py-2 rounded-xl transition-all duration-200 flex-1 sm:flex-initial text-center whitespace-nowrap"
+          >
+            💳 Standard Rates
+          </button>
+
+          <button 
+            @click="activeTab = 'blog'" 
+            :class="activeTab === 'blog' ? 'bg-white text-indigo-900 shadow-sm' : 'text-indigo-200 hover:text-white'"
+            class="px-4 py-2 rounded-xl transition-all duration-200 flex-1 sm:flex-initial text-center whitespace-nowrap"
+          >
+            📰 Blog & Guides
+          </button>
+          
+          <button 
+            @click="activeTab = 'about'" 
+            :class="activeTab === 'about' ? 'bg-white text-indigo-900 shadow-sm' : 'text-indigo-200 hover:text-white'"
+            class="px-4 py-2 rounded-xl transition-all duration-200 flex-1 sm:flex-initial text-center whitespace-nowrap"
+          >
+            🏢 About Us
+          </button>
+        </nav>
+
+      </div>
+    </header>
+
+    <!-- TAB 1: CREATIVE HOME PAGE (DEFAULT) -->
+    <div x-show="activeTab === 'home'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95">
+      
+      <!-- Hero Section with Static Background Banner Image -->
+      <section class="relative bg-slate-900 text-white overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-40">
+          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1600&auto=format&fit=crop" alt="Chauffeur Driving Car" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-4 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <span class="inline-flex items-center gap-2 text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1.5 rounded-full">
+              ✨ Trusted Chauffeurs & Acting Drivers
+            </span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+              Hire Reliable Drivers <br><span class="text-indigo-400">For Your Own Car</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-lg max-w-xl leading-relaxed">
+              Whether it's daily city commutes, late-night events, or long-distance outstation travel — book background-verified drivers in minutes.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-2">
+              <button @click="activeTab = 'drivers'" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-7 py-3.5 rounded-2xl transition shadow-lg shadow-indigo-600/30 text-sm">
+                Find Drivers Now
+              </button>
+              <button @click="activeTab = 'tariffs'" class="bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-2xl backdrop-blur-md border border-white/20 transition text-sm">
+                View Price Tariffs
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Search Card Overlay -->
+          <div class="lg:col-span-5 bg-white text-slate-800 p-6 rounded-3xl shadow-2xl border border-slate-100">
+            <h3 class="text-lg font-bold text-slate-900 mb-1">Quick Driver Search</h3>
+            <p class="text-xs text-slate-500 mb-4">Find available drivers near your location instantly.</p>
+            
+            <form 
+              hx-get="{% url 'driver_list' %}" 
+              hx-target="#driver-grid-container" 
+              hx-select="#driver-grid-container"
+              hx-swap="outerHTML"
+              @submit.prevent="activeTab = 'drivers'"
+              class="space-y-4"
+            >
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">City / Region</label>
+                <input type="text" name="city" placeholder="e.g. Chennai, Coimbatore, Bengaluru..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Car Transmission</label>
+                <select name="transmission" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                  <option value="">Any Transmission Type</option>
+                  <option value="MANUAL">Manual Transmission</option>
+                  <option value="AUTOMATIC">Automatic Transmission</option>
+                  <option value="BOTH">Both Manual & Automatic</option>
+                </select>
+              </div>
+
+              <button type="submit" @click="activeTab = 'drivers'" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition text-sm shadow-md">
+                Search Drivers
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Metrics Bar -->
+      <section class="bg-white border-b border-slate-200 py-8">
+        <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <p class="text-3xl font-black text-indigo-600">5,000+</p>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1">Trips Completed</p>
+          </div>
+          <div>
+            <p class="text-3xl font-black text-indigo-600">100%</p>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1">Verified License</p>
+          </div>
+          <div>
+            <p class="text-3xl font-black text-indigo-600">4.9 ★</p>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1">User Satisfaction</p>
+          </div>
+          <div>
+            <p class="text-3xl font-black text-indigo-600">24 / 7</p>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-1">Support Available</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Visual Grid -->
+      <section class="container mx-auto px-4 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">Our Offerings</span>
+          <h2 class="text-3xl font-extrabold text-slate-900 mt-3">Tailored Driver Services</h2>
+          <p class="text-slate-500 text-sm mt-2">Flexible acting driver arrangements designed for personal cars and fleet management.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Service Card 1 -->
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between">
+            <div>
+              <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=800&auto=format&fit=crop" alt="City Driving" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <span class="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg">In-City</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-3">Hourly & Daily Local Trips</h3>
+                <p class="text-slate-500 text-xs mt-2 leading-relaxed">
+                  Avoid traffic stress during shopping runs, office commutes, or night events with hourly driver packages.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button @click="activeTab = 'tariffs'" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 inline-flex items-center gap-1">
+                View Pricing →
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between">
+            <div>
+              <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop" alt="Outstation Driving" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">Outstation</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-3">Outstation & Highway Drives</h3>
+                <p class="text-slate-500 text-xs mt-2 leading-relaxed">
+                  Experienced drivers specialized in long-distance highway travel, weekend getaways, and inter-city routes.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button @click="activeTab = 'tariffs'" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 inline-flex items-center gap-1">
+                View Pricing →
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between">
+            <div>
+              <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop" alt="Luxury Car Chauffeur" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <span class="text-[11px] font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg">Premium</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-3">Luxury & Automatic Cars</h3>
+                <p class="text-slate-500 text-xs mt-2 leading-relaxed">
+                  Specialized drivers trained in handling premium sedans, SUVs, and high-end automatic vehicles safely.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button @click="activeTab = 'drivers'" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 inline-flex items-center gap-1">
+                Find Drivers →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Drivers Preview Section -->
+      <section class="bg-slate-100 py-16 border-y border-slate-200">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10">
+            <div>
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Available Profiles</span>
+              <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Featured Verified Drivers</h2>
+            </div>
+            <button @click="activeTab = 'drivers'" class="mt-4 sm:mt-0 text-sm font-bold text-indigo-600 hover:text-indigo-800 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm">
+              View All Drivers →
+            </button>
+          </div>
+
+          <!-- Static Preview Cards for Homepage -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center space-x-4">
+                  <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-800 font-bold flex items-center justify-center text-lg">
+                    KA
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900">Karthik A.</h4>
+                    <p class="text-xs text-slate-500">📍 Chennai • 8 Yrs Exp</p>
+                    <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded mt-1 inline-block">✓ Verified</span>
+                  </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 space-y-1.5 text-xs">
+                  <div class="flex justify-between text-slate-600"><span>Transmission:</span><span class="font-bold text-slate-800">Manual & Auto</span></div>
+                  <div class="flex justify-between text-slate-600"><span>Local Rate:</span><span class="font-bold text-slate-800">₹500 / 4 Hrs</span></div>
+                </div>
+              </div>
+              <button @click="activeTab = 'drivers'" class="mt-6 w-full py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl text-xs transition">
+                View Contact Info
+              </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center space-x-4">
+                  <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-800 font-bold flex items-center justify-center text-lg">
+                    RM
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900">Ramesh M.</h4>
+                    <p class="text-xs text-slate-500">📍 Coimbatore • 12 Yrs Exp</p>
+                    <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded mt-1 inline-block">✓ Verified</span>
+                  </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 space-y-1.5 text-xs">
+                  <div class="flex justify-between text-slate-600"><span>Transmission:</span><span class="font-bold text-slate-800">Manual Only</span></div>
+                  <div class="flex justify-between text-slate-600"><span>Outstation Rate:</span><span class="font-bold text-slate-800">₹1,300 / Day</span></div>
+                </div>
+              </div>
+              <button @click="activeTab = 'drivers'" class="mt-6 w-full py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl text-xs transition">
+                View Contact Info
+              </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center space-x-4">
+                  <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-800 font-bold flex items-center justify-center text-lg">
+                    S
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900">Suresh Kumar</h4>
+                    <p class="text-xs text-slate-500">📍 Madurai • 6 Yrs Exp</p>
+                    <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded mt-1 inline-block">✓ Verified</span>
+                  </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 space-y-1.5 text-xs">
+                  <div class="flex justify-between text-slate-600"><span>Transmission:</span><span class="font-bold text-slate-800">Automatic Specialist</span></div>
+                  <div class="flex justify-between text-slate-600"><span>Local Rate:</span><span class="font-bold text-slate-800">₹450 / 4 Hrs</span></div>
+                </div>
+              </div>
+              <button @click="activeTab = 'drivers'" class="mt-6 w-full py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl text-xs transition">
+                View Contact Info
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest Blog & Tips Teaser Section -->
+      <section class="container mx-auto px-4 py-16">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10">
+          <div>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Driving Advice</span>
+            <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Driving Tips & Articles</h2>
+          </div>
+          <button @click="activeTab = 'blog'" class="mt-4 sm:mt-0 text-sm font-bold text-indigo-600 hover:text-indigo-800">
+            Read Blog Hub →
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition cursor-pointer" @click="activeTab = 'blog'">
+            <img src="https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=800&auto=format&fit=crop" alt="Highway Drive" class="w-full h-44 object-cover">
+            <div class="p-6">
+              <span class="text-[11px] font-bold text-slate-400">March 12, 2026 • 4 min read</span>
+              <h3 class="text-base font-bold text-slate-900 mt-2 hover:text-indigo-600 transition">5 Night Driving Safety Checklist Points Every Car Owner Must Know</h3>
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">Ensure your night journey remains safe with properly configured headlights, driver fatigue checks, and highway speed guidelines.</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition cursor-pointer" @click="activeTab = 'blog'">
+            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=800&auto=format&fit=crop" alt="Automatic Transmission" class="w-full h-44 object-cover">
+            <div class="p-6">
+              <span class="text-[11px] font-bold text-slate-400">February 28, 2026 • 3 min read</span>
+              <h3 class="text-base font-bold text-slate-900 mt-2 hover:text-indigo-600 transition">Manual vs Automatic: What to Consider When Hiring an Acting Driver</h3>
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">Why matching your car's exact transmission type with an experienced driver prevents gearbox wear and enhances ride comfort.</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition cursor-pointer" @click="activeTab = 'blog'">
+            <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?q=80&w=800&auto=format&fit=crop" alt="Car Maintenance" class="w-full h-44 object-cover">
+            <div class="p-6">
+              <span class="text-[11px] font-bold text-slate-400">February 15, 2026 • 5 min read</span>
+              <h3 class="text-base font-bold text-slate-900 mt-2 hover:text-indigo-600 transition">Preparing Your Car for Long Highway Outstation Trips</h3>
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">Essential car checks before handing over the keys to a temporary driver for interstate journeys.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- TAB 2: FIND DRIVERS (DYNAMIC DJANGO / HTMX TAB) -->
+    <div x-show="activeTab === 'drivers'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95">
+      
+      <!-- Interactive Filter Bar -->
+      <section class="container mx-auto px-4 mt-6">
+        <div class="bg-white p-5 rounded-3xl shadow-sm border border-slate-200/80">
+          
+          <form 
+            hx-get="{% url 'driver_list' %}" 
+            hx-target="#driver-grid-container" 
+            hx-select="#driver-grid-container"
+            hx-swap="outerHTML"
+            hx-trigger="keyup delay:300ms from:input, change from:select"
+            class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end"
+          >
+            
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">City / Area</label>
+              <div class="relative">
+                <input 
+                  type="text" 
+                  name="city" 
+                  value="{{ selected_city }}" 
+                  placeholder="e.g. Chennai, Coimbatore..." 
+                  class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm font-medium"
+                >
+                <svg class="w-5 h-5 text-slate-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Transmission</label>
+              <select 
+                name="transmission" 
+                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm font-medium"
+              >
+                <option value="">All Types (Manual & Automatic)</option>
+                <option value="MANUAL" {% if selected_transmission == 'MANUAL' %}selected{% endif %}>Manual Transmission Only</option>
+                <option value="AUTOMATIC" {% if selected_transmission == 'AUTOMATIC' %}selected{% endif %}>Automatic Transmission Only</option>
+                <option value="BOTH" {% if selected_transmission == 'BOTH' %}selected{% endif %}>Both Manual & Automatic</option>
+              </select>
+            </div>
+
+            <div>
+              <a href="{% url 'driver_list' %}" class="w-full block text-center bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 rounded-2xl transition text-sm">
+                Reset Filters
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+      <!-- Driver Grid Container -->
+      <main id="driver-grid-container" class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          {% for driver in drivers %}
+            <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/70 overflow-hidden flex flex-col justify-between group">
+              
+              <div class="p-6">
+                <!-- Header Info -->
+                <div class="flex items-start space-x-4">
+                  {% if driver.profile_photo %}
+                    <img src="{{ driver.profile_photo.url }}" alt="{{ driver.full_name }}" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-indigo-500/30 flex-shrink-0 group-hover:scale-105 transition duration-300">
+                  {% else %}
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center font-black text-xl flex-shrink-0">
+                      {{ driver.full_name|slice:":2" }}
+                    </div>
+                  {% endif %}
+
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-lg font-bold text-slate-900 truncate">{{ driver.full_name }}</h3>
+                      <span class="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded-lg flex items-center gap-1">
+                        ★ {{ driver.rating }}
+                      </span>
+                    </div>
+
+                    <p class="text-xs text-slate-500 mt-1 font-medium">
+                      📍 {{ driver.city }} • <span class="text-slate-700 font-semibold">{{ driver.experience_years }} Yrs Exp</span>
+                    </p>
+
+                    <div class="mt-3 flex items-center gap-2">
+                      <span class="text-[11px] font-bold px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg border border-indigo-100">
+                        {{ driver.get_transmission_type_display }}
+                      </span>
+                      {% if driver.is_verified %}
+                        <span class="text-[11px] font-bold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100 flex items-center gap-1">
+                          ✓ Verified
+                        </span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Rates & Booking Actions -->
+              <div class="border-t border-slate-100 p-6 bg-slate-50/50">
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5">Pricing Schedule</p>
+                
+                <div class="space-y-2 mb-5">
+                  {% for price in driver.pricing.all %}
+                    <div class="flex justify-between items-center text-xs">
+                      <span class="text-slate-600 font-medium">{{ price.trip_type }}</span>
+                      <span class="font-extrabold text-slate-900">₹{{ price.base_rate }}</span>
+                    </div>
+                  {% empty %}
+                    <p class="text-xs text-slate-400 italic">Call for custom trip quotes.</p>
+                  {% endfor %}
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="tel:{{ driver.phone_number }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl transition text-center text-xs flex items-center justify-center space-x-1.5 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <span>Direct Call</span>
+                  </a>
+
+                  <a href="https://wa.me/91{{ driver.phone_number }}?text=Hi%20{{ driver.full_name|urlencode }},%20I%20want%20to%20book%20an%20acting%20driver." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl transition text-center text-xs flex items-center justify-center space-x-1.5 shadow-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 2c-5.514 0-9.999 4.486-9.999 10 0 1.763.459 3.483 1.332 5.013l-1.364 4.987 5.101-1.337c1.472.802 3.136 1.237 4.83 1.237 5.514 0 10-4.486 10-10s-4.486-10-10-10zm0 18.208c-1.52 0-3.007-.403-4.307-1.168l-.309-.183-3.201.839.854-3.123-.201-.321c-.84-1.341-1.284-2.887-1.284-4.452 0-4.526 3.682-8.208 8.208-8.208s8.208 3.682 8.208 8.208-3.682 8.208-8.208 8.208z"/></svg>
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+          {% empty %}
+            <div class="col-span-full bg-white rounded-3xl p-12 text-center border border-slate-200">
+              <p class="text-base font-bold text-slate-700">No active drivers found matching your criteria.</p>
+              <p class="text-xs text-slate-500 mt-1">Try resetting the city search or transmission filter.</p>
+            </div>
+          {% endfor %}
+
+        </div>
+      </main>
+    </div>
+
+    <!-- TAB 3: STANDARD TARIFFS / PRICING GUIDE -->
+    <div x-show="activeTab === 'tariffs'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95">
+      <section class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-extrabold text-slate-900">Standard Fare Estimator</h2>
+          <p class="text-sm text-slate-500 mt-1">Transparent base rates for local trips and outstation travel.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Local Package Card -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+            <span class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] uppercase font-bold px-3 py-1 rounded-bl-xl">Popular</span>
+            <h3 class="text-lg font-bold text-slate-900">Local City Trips</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Within city limits (In-city driving)</p>
+            
+            <ul class="mt-6 space-y-3 text-sm">
+              <li class="flex justify-between border-b border-slate-100 pb-2">
+                <span class="text-slate-600">Mini Package (4 Hours)</span>
+                <span class="font-bold text-slate-900">₹400 - ₹500</span>
+              </li>
+              <li class="flex justify-between border-b border-slate-100 pb-2">
+                <span class="text-slate-600">Standard Package (8 Hours)</span>
+                <span class="font-bold text-slate-900">₹800 - ₹1,000</span>
+              </li>
+              <li class="flex justify-between border-b border-slate-100 pb-2">
+                <span class="text-slate-600">Overtime Rate</span>
+                <span class="font-bold text-indigo-600">₹100 / Hour</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Outstation Package Card -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900">Outstation / Long Distance</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Inter-city & highway travel</p>
+            
+            <ul class="mt-6 space-y-3 text-sm">
+              <li class="flex justify-between border-b border-slate-100 pb-2">
+                <span class="text-slate-600">Day Charge (12 Hours)</span>
+                <span class="font-bold text-slate-900">₹1,200 - ₹1,500</span>
+              </li>
+              <li class="flex justify-between border-b border-slate-100 pb-2">
+                <span class="text-slate-600">Night Allowance (10 PM - 6 AM)</span>
+                <span class="font-bold text-slate-900">₹300 Extra</span>
+              </li>
+              <li class="flex justify-between border-b border-slate-100 pb-2">
+                <span class="text-slate-600">Driver Food Allowance</span>
+                <span class="font-bold text-indigo-600">₹200 / Day</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 4: BLOG & GUIDES SECTION -->
+    <div x-show="activeTab === 'blog'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95">
+      <section class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-black text-slate-900">DriveDirect Blog & Road Safety</h2>
+          <p class="text-sm text-slate-500 mt-1">Guides on car care, driver safety standards, and road trip planning.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <img src="https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=800&auto=format&fit=crop" alt="Night Driving" class="w-full h-52 object-cover">
+            <div class="p-6">
+              <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">Safety First</span>
+              <h3 class="text-xl font-bold text-slate-900 mt-3">Essential Safety Checks Before Hiring a Chauffeur</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Before handing over your keys, ensure the driver verifies their background details, checks tire pressures, and understands transmission controls.
+              </p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop" alt="Car Steering Wheel" class="w-full h-52 object-cover">
+            <div class="p-6">
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">Maintenance</span>
+              <h3 class="text-xl font-bold text-slate-900 mt-3">How Acting Drivers Prevent Clutch & Transmission Wear</h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Proper gear shifts and clutch handling play a huge role in maintaining your vehicle's engine lifespan over long highway trips.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 5: ABOUT COMPANY & VERIFICATION -->
+    <div x-show="activeTab === 'about'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95">
+      <section class="container mx-auto px-4 py-8 max-w-4xl">
+        
+        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+          <div>
+            <h2 class="text-2xl font-black text-slate-900">About DriveDirect</h2>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+              DriveDirect connects vehicle owners with verified, professional acting drivers for personal cars, commercial fleets, and outstation trips.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
+            <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100">
+              <p class="text-xl font-black text-indigo-700">100%</p>
+              <p class="text-xs font-semibold text-slate-600 mt-1">Background Checked Drivers</p>
+            </div>
+            <div class="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100">
+              <p class="text-xl font-black text-emerald-700">24 / 7</p>
+              <p class="text-xs font-semibold text-slate-600 mt-1">On-Demand Availability</p>
+            </div>
+            <div class="p-4 bg-amber-50/50 rounded-2xl border border-amber-100">
+              <p class="text-xl font-black text-amber-700">4.9 ★</p>
+              <p class="text-xs font-semibold text-slate-600 mt-1">Average Customer Rating</p>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100">
+            <h3 class="text-base font-bold text-slate-800 mb-2">Driver Safety Standards</h3>
+            <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5">
+              <li>Valid Driving License (LMV / Transport category) verified.</li>
+              <li>Experience across both manual and automatic transmission cars.</li>
+              <li>Clean driving record and identity proof on file.</li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-12 mt-16">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-xs">
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">DriveDirect Platform</h4>
+        <p class="leading-relaxed">Reliable acting drivers on demand for personal cars, outstation travel, and corporate events.</p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Quick Navigation</h4>
+        <ul class="space-y-2">
+          <li><button @click="activeTab = 'home'" class="hover:text-white transition">Home</button></li>
+          <li><button @click="activeTab = 'drivers'" class="hover:text-white transition">Find Drivers</button></li>
+          <li><button @click="activeTab = 'tariffs'" class="hover:text-white transition">Rates & Fare Calculator</button></li>
+          <li><button @click="activeTab = 'blog'" class="hover:text-white transition">Driver Blog</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Service Areas</h4>
+        <ul class="space-y-1.5 text-slate-500">
+          <li>Chennai & Suburbs</li>
+          <li>Coimbatore Metropolitan Area</li>
+          <li>Madurai, Trichy & Salem</li>
+          <li>Bengaluru Outstation Routes</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Verification Policy</h4>
+        <p class="leading-relaxed">All registered drivers undergo identity checks, driving license validation, and past experience verification prior to listing.</p>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 border-t border-slate-800 mt-8 pt-6 text-center text-xs text-slate-600">
+      <p>© DriveDirect Platform. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="IvJjL_AF_ay7zugVqw7hG1k5UGHPwYiMYLduRB0Yvnk" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DriveDirect - Modern Acting Driver Platform</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- HTMX for Instant Server-Side Search -->
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  
+  <!-- Alpine.js for Tab State & Interactive UI -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
 <body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col justify-between font-sans" x-data="{ activeTab: 'drivers' }">
 
   <div>
@@ -315,4 +1009,4 @@
   </footer>
 
 </body>
-</html>
+</html> -->
